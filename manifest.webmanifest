@@ -1,0 +1,18 @@
+{
+    "name": "Calcul Machine",
+    "short_name": "Calcul Machine",
+    "description": "Calcul du temps pour régler le départ différé de la machine",
+    "theme_color": "#0b0b3c",
+    "background_color": "#0b0b3c",
+    "display": "standalone",
+    "scope": "./",
+    "start_url": "./", 
+    "icons": [
+        {
+          "src": "logo-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purouse": "any maskable"
+        }
+    ]
+  }

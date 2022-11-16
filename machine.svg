@@ -3,7 +3,7 @@
  xmlns:xlink="http://www.w3.org/1999/xlink"
  width="180px" height="180px" 
 viewBox="0 0 24 24" 
-stroke="currentColor" 
+stroke="white" 
 stroke-width="1" 
 fill="none" 
 stroke-linecap="round" 
@@ -16,13 +16,13 @@ stroke-linejoin="round"
     <line x1="19" y1="3" x2="19" y2="3"></line>
     <line x1="1" y1="5" x2="13" y2="5" stroke-width=".25"></line>
     <line x1="15" y1="5" x2="23" y2="5" stroke-width=".25"></line>
-    <path fill="#194d5e" stroke="transparent"
+    <path fill="#194d5e" stroke="none"
         d="M 12,15 c 4,-3 5,-2 6,-1 c -1,2 -5,2 -6,0"
     />
     <path 
         stroke-width=".5"
         fill="#228f91"
-        stroke="transparent"
+        stroke="none"
         d="
             M 6 14
             C 7,12
