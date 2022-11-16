@@ -6,66 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <style>
-        * {
-            margin: 0; 
-            padding: 0;
-            box-sizing: border-box;
-            font-family: sans-serif; 
-        }
-        input {
-            background: transparent;
-            border: none;
-            box-shadow: -5px 6px 12px #00000061, 6px -5px 13px #ffffff4d;
-            color: white;
-            font-weight: 900;
-            padding: 1em;
-            border-radius: 4px;
-            width: 96px;
-            margin: 2em 0;
-        }
-        
-        .app-container {
-            margin: auto; 
-            width: 100vw; 
-            height: 100vh;
-            background: linear-gradient(131deg, #0b0b3c, #025764); 
-            color: wheat; 
-            padding: 1em;
-        }
-        .ico-container {
-            max-width: 360px;
-            margin:auto; 
-        }
-        .ico-container svg {
-            width: 72px;
-            height: 72px;
-            stroke-width: 1;
-            transition: all ease 320ms;
-            /* width: 262px;
-            height: 262px; */
-        }
-        .ico-container svg:hover {
-            /* stroke-width: 1.2; */
-        }
-        .ico-container svg:hover line {
-            transform: rotate(360deg);
-        }
-        .input-container {
-            display: flex;
-            margin: .4em auto; 
-            justify-content: space-between;
-            max-width: 360px;
-        }
-        #response {
-            max-width: 360px;
-            margin: auto; 
-            padding: 1em;
-            background: linear-gradient(45deg, #fffdf8, #ffdddda8);
-            color: #212121;
-            border-radius: 4px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
     <div class="app-container">
@@ -115,17 +56,36 @@
                 <circle cx="12" cy="14" r="6"></circle>
             </svg>
         </div>
-        <div class="input-container">
-            <label>Heure de début :</label>
+        <div class="input-section start-container">
+            <label>*Heure de début :</label>
             <input type="time" id="start">
         </div>
-        <div class="input-container">
-            <label>Durée de la machine :</label>
-            <input type="time" id="length">
+        <div class="input-section">
+            <label>Durée prévue :</label>
+            <div class="input-container length-input-container">
+                <div class="hrs-container">
+                    <button id="increase-hrs" onclick="changeValue(1, event);">+</button>
+                    <div class="number-container">
+                        <input type="number" min="0" id="planned-hrs">
+                        <span>h</span>
+                    </div>
+                    <button id="decrease-hrs" onclick="changeValue(-1, event);">-</button>
+                </div>
+                <div class="min-container">
+                    <button id="increase-min" onclick="changeValue(5, event);">+</button>
+                    <div class="number-container">
+                        <input type="number" max="59" min="0" id="planned-min">
+                        <span>min</span>
+                    </div>
+                    <button id="decrease-min" onclick="changeValue(-5, event);">-</button>
+                </div>
+            </div>
         </div>
-        <div class="input-container">
+        <div class="input-section">
             <label>Heure de fin :</label>
-            <input type="time" id="finish_hour">
+            <div class="input-container finish-input-container">
+                <input type="time" id="finish_hour">
+            </div>
         </div>
         <!-- <button onclick="calculateDelay();">Calculer</button> -->
     
@@ -145,7 +105,7 @@
 
 
         function calculateDelay() {
-            if (!document.getElementById('finish_hour').value || !document.getElementById('length').value ) {
+            if (!document.getElementById('finish_hour').value || !document.getElementById('planned-hrs').value || !document.getElementById('planned-min') ) {
                 return; 
             }
             // console.log(document.getElementById('length').value); 
@@ -155,7 +115,7 @@
             // set variables : 
             let starting_ts = document.getElementById('start').value ? Time.parseHourString(document.getElementById('start').value) : Date.now(); 
             let finish_ts = new Date().setHours(split[0], split[1]); 
-            let length_ms = Time.parseLengthString(document.getElementById('length').value); 
+            let length_ms = Time.parseLengthString(getPlannedLength()); 
 
             //verify if input end hour is today or tomorow :
             if (finish_ts < starting_ts) {
@@ -191,6 +151,23 @@
 
 
 
+
+
+        function changeValue(nb, event) {
+            let newValue = event.currentTarget.parentElement.querySelector('input[type="number"]').value*1 + nb;
+            console.log(newValue); 
+            newValue = newValue.toString().padStart(2, '0');  
+            console.log(newValue);
+            event.currentTarget.parentElement.querySelector('input[type="number"]').value = newValue; 
+        }
+
+
+        function getPlannedLength() {
+            let hrs = document.querySelector('#planned-hrs').value || 0; 
+            let min = document.querySelector('#planned-min').value || 0; 
+            return `${hrs.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}`; 
+            return 'XX:YY'; 
+        }
         
 
     </script>

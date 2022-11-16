@@ -13,17 +13,16 @@ class Time {
         return new Date().setHours(split[0], split[1]); 
     }
 
-    static formatMs(ms) {
+    static formatMs(ms, date = false) {
         let sec = Math.floor((ms / (1000) )) % 60; 
         let min = Math.floor((ms / (1000 *60))) % 60; 
-        let hrs = Math.floor((ms / (1000 * 60 * 60))) % 60; 
-
+        let hrs = Math.floor((ms / (1000 * 60 * 60))); 
+        if (date) { hrs = hrs % 24 }
         let formated = [
             hrs.toString().padStart(2, '0'), 
             min.toString().padStart(2, '0'),
             sec.toString().padStart(2, '0')
         ].join(':'); 
-
         return formated; 
 
     }
