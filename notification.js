@@ -7,5 +7,6 @@ Notification.requestPermission().then(function(result) {
 
 
 let notification = new Notification('Nouveautés', {
-    body: "- Nouveau style"
+    body: "- Nouveau style", 
+    icon: "logo-144.png"
 }); 
